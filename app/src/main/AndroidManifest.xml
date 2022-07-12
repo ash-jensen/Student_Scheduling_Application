@@ -22,8 +22,10 @@
             android:name=".UI.CourseDetail"
             android:exported="false" />
         <activity
-            android:name=".UI.CourseList"
-            android:exported="false" />
+            android:name=".UI.TermDetails"
+            android:exported="false"
+            android:label="Term Details"
+            android:parentActivityName=".UI.TermList"/>
         <activity
             android:name=".UI.TermList"
             android:exported="false"
