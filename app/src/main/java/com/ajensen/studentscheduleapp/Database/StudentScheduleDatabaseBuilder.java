@@ -23,6 +23,7 @@ public abstract class StudentScheduleDatabaseBuilder extends RoomDatabase {
 
     private static volatile StudentScheduleDatabaseBuilder INSTANCE;
 
+    // Gets an instance of the database
     static StudentScheduleDatabaseBuilder getDatabase(final Context context) {
         if(INSTANCE == null) {
             synchronized(StudentScheduleDatabaseBuilder.class) {

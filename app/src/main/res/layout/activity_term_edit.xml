@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.TermDetails">
+    tools:context=".UI.TermEdit">
+
 
     <ScrollView
-        android:id="@+id/termDetailSV"
-        android:layout_width="392dp"
-        android:layout_height="183dp"
+        android:layout_width="390dp"
+        android:layout_height="247dp"
         android:layout_margin="10dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -33,9 +33,7 @@
                     android:id="@+id/editName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Enter Term Name"
-                    android:inputType="none"
-                    android:enabled="false"/>
+                    android:hint="Enter Term Name" />
             </LinearLayout>
 
             <LinearLayout
@@ -57,7 +55,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
@@ -71,37 +69,19 @@
                     android:layout_height="wrap_content"
                     android:hint="Enter term end date" />
             </LinearLayout>
-
-            <Button
-                android:id="@+id/editButton"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:clickable="true"
-                android:onClick="editButton"
-                android:text="Edit Term Info" />
         </LinearLayout>
     </ScrollView>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/addTermButton"
+    <Button
+        android:id="@+id/saveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="16dp"
         android:clickable="true"
-        android:onClick="AddCourse"
+        android:onClick="saveButton"
+        android:text="Save Changes"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:srcCompat="@drawable/ic_baseline_add_24" />
-
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/courseListRV"
-        android:layout_width="392dp"
-        android:layout_height="514dp"
-        android:layout_margin="10dp"
-        android:background="@color/lavender"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/termDetailSV" />
+        tools:layout_editor_absoluteX="152dp"
+        tools:layout_editor_absoluteY="658dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

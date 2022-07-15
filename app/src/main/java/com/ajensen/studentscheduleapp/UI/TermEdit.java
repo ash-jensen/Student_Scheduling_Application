@@ -2,7 +2,6 @@ package com.ajensen.studentscheduleapp.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,8 +16,7 @@ import com.ajensen.studentscheduleapp.R;
 
 import java.util.Date;
 
-public class TermDetails extends AppCompatActivity {
-    Repository repo ;
+public class TermEdit extends AppCompatActivity {
     EditText editName;
     EditText editStartDate;
     EditText editEndDate;
@@ -26,11 +24,12 @@ public class TermDetails extends AppCompatActivity {
     String name;
     String startDate;
     String endDate;
+    Repository repo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_term_details);
+        setContentView(R.layout.activity_term_edit);
         editName = findViewById(R.id.editName);
         editStartDate = findViewById(R.id.editStartDate);
         editEndDate = findViewById(R.id.editEndDate);
@@ -46,7 +45,7 @@ public class TermDetails extends AppCompatActivity {
 
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_term_detail, menu);
+        getMenuInflater().inflate(R.menu.menu_term_edit, menu);
         return true;
     }
 
@@ -59,16 +58,17 @@ public class TermDetails extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void editButton(View view) {
-        Intent intent = new Intent(TermDetails.this, TermEdit.class);
-        intent.putExtra("id", id);
-        intent.putExtra("name", name);
-        // change to use date picker, here and in term details
-        intent.putExtra("startDate", startDate);
-        intent.putExtra("endDate", endDate);
-        startActivity(intent);
-    }
-
-    public void AddCourse(View view) {
+    public void saveButton(View view) {
+        Term term;
+        if (id == -1) {
+            int newId = repo.getAllTerms().get(repo.getAllTerms().size() -1).getTermId() + 1;
+            // Date picker!
+            term = new Term(newId, editName.getText().toString(), new Date(), new Date());
+            repo.insert(term);
+        }
+        else {
+            term = new Term(id, editName.getText().toString(), new Date(), new Date());
+            repo.update(term);
+        }
     }
 }

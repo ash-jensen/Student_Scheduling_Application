@@ -14,18 +14,20 @@
         android:theme="@style/Theme.StudentScheduleApp"
         tools:targetApi="31">
         <activity
-            android:name=".UI.TermAdd"
+            android:name=".UI.TermEdit"
             android:exported="false"
-            android:label="Add New Term"
-            android:parentActivityName=".UI.TermList"/>
+            android:label="Add or Edit Term"
+            android:parentActivityName=".UI.TermDetails"/>
         <activity
             android:name=".UI.CourseDetail"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Course Details"
+            android:parentActivityName=".UI.TermDetails"/>
         <activity
             android:name=".UI.TermDetails"
             android:exported="false"
             android:label="Term Details"
-            android:parentActivityName=".UI.TermList"/>
+            android:parentActivityName=".UI.TermList" />
         <activity
             android:name=".UI.TermList"
             android:exported="false"
