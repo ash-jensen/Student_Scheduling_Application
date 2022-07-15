@@ -52,7 +52,9 @@
                     android:id="@+id/editStartDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Enter term start date" />
+                    android:hint="Enter term start date"
+                    android:inputType="none"
+                    android:enabled="false"/>
             </LinearLayout>
 
             <LinearLayout
@@ -69,7 +71,9 @@
                     android:id="@+id/editEndDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Enter term end date" />
+                    android:hint="Enter term end date"
+                    android:inputType="none"
+                    android:enabled="false"/>
             </LinearLayout>
 
             <Button

@@ -9,6 +9,7 @@
         <entry key="app/src/main/res/drawable/ic_baseline_school_24.xml" value="0.2445" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.2445" />
         <entry key="app/src/main/res/layout/activity_course_detail.xml" value="0.28396739130434784" />
+        <entry key="app/src/main/res/layout/activity_course_edit.xml" value="0.31614583333333335" />
         <entry key="app/src/main/res/layout/activity_course_list.xml" value="0.28396739130434784" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.28396739130434784" />
         <entry key="app/src/main/res/layout/activity_term_add.xml" value="0.28396739130434784" />

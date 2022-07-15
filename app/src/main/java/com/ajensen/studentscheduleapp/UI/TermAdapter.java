@@ -27,7 +27,7 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.TermViewHolder
         // Constructor for the viewHolder
         private TermViewHolder(View itemView) {
             super(itemView);
-            termItemView = itemView.findViewById(R.id.textView);
+            termItemView = itemView.findViewById(R.id.termItemTV);
             // Click takes you to term details activity, holds all clicked term details
             itemView.setOnClickListener(new View.OnClickListener(){
                 @Override
@@ -38,8 +38,8 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.TermViewHolder
                     intent.putExtra("id", current.getTermId());
                     intent.putExtra("name", current.getTermName());
                     // change to use date picker, here and in term details
-                    intent.putExtra("startDate", (current.getStartDate()).toString());
-                    intent.putExtra("endDate", (current.getEndDate()).toString());
+                    intent.putExtra("startDate", (current.getStartDate()).getTime());
+                    intent.putExtra("endDate", (current.getEndDate()).getTime());
                     context.startActivity(intent);
                 }
             });
