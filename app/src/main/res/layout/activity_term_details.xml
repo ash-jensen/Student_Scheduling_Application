@@ -33,9 +33,7 @@
                     android:id="@+id/editName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Enter Term Name"
-                    android:inputType="none"
-                    android:enabled="false"/>
+                    android:hint="Enter Term Name" />
             </LinearLayout>
 
             <LinearLayout
@@ -52,9 +50,7 @@
                     android:id="@+id/editStartDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Enter term start date"
-                    android:inputType="none"
-                    android:enabled="false"/>
+                    android:hint="Enter term start date" />
             </LinearLayout>
 
             <LinearLayout
@@ -71,18 +67,33 @@
                     android:id="@+id/editEndDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Enter term end date"
-                    android:inputType="none"
-                    android:enabled="false"/>
+                    android:hint="Enter term end date" />
             </LinearLayout>
 
-            <Button
-                android:id="@+id/editButton"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:clickable="true"
-                android:onClick="editButton"
-                android:text="Edit Term Info" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/deleteButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:onClick="deleteButton"
+                    android:text="Delete Term" />
+
+                <Button
+                    android:id="@+id/editButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:clickable="true"
+                    android:onClick="saveEditsButton"
+                    android:text="Save Edits"
+                    android:layout_marginLeft="20dp"/>
+
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 

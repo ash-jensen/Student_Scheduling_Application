@@ -3,6 +3,7 @@ package com.ajensen.studentscheduleapp.UI;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,7 +21,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-public class TermEdit extends AppCompatActivity {
+public class TermAdd extends AppCompatActivity {
     EditText editName;
     EditText editStartDate;
     EditText editEndDate;
@@ -30,8 +31,6 @@ public class TermEdit extends AppCompatActivity {
     final Calendar endDateCalendar = Calendar.getInstance();
     String dateFormat;
     SimpleDateFormat sdf;
-    int id;
-    String name;
     String startDateString;
     Date startDate;
     String endDateString;
@@ -41,25 +40,20 @@ public class TermEdit extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_term_edit);
+        setContentView(R.layout.activity_term_add);
+
         // Get information from termList about the term
         editName = findViewById(R.id.editName);
         editStartDate = findViewById(R.id.editStartDate);
         editEndDate = findViewById(R.id.editEndDate);
-        id = getIntent().getIntExtra("id", -1);
-        name = getIntent().getStringExtra("name");
-        startDate = new Date();
-        startDate.setTime(getIntent().getLongExtra("startDate", -1));
-        endDate = new Date();
-        endDate.setTime(getIntent().getLongExtra("endDate", -1));
-        editName.setText(name);
         repo = new Repository(getApplication());
-
         // Date pickers and formatter
-        dateFormat = "MM/dd/yy"; //In which you need put here
+        dateFormat = "MM/dd/yy";
         sdf = new SimpleDateFormat(dateFormat, Locale.US);
+        startDate = new Date();
         startDateString = sdf.format(startDate);
         editStartDate.setText(startDateString);
+        endDate = new Date();
         endDateString = sdf.format(endDate);
         editEndDate.setText(endDateString);
         // Start date
@@ -67,15 +61,13 @@ public class TermEdit extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                // Date date;
-                String info = editStartDate.getText().toString();
-                if (info.equals("")) info = "01/01/22";
+                if (startDateString.equals("")) startDateString = "01/01/22";
                 try {
-                    startDateCalendar.setTime(sdf.parse(info));
+                    startDateCalendar.setTime(sdf.parse(startDateString));
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                new DatePickerDialog(TermEdit.this, startDatePicker, startDateCalendar
+                new DatePickerDialog(TermAdd.this, startDatePicker, startDateCalendar
                         .get(Calendar.YEAR), startDateCalendar.get(Calendar.MONTH),
                         startDateCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
@@ -90,20 +82,19 @@ public class TermEdit extends AppCompatActivity {
                 updateLabelStart();
             }
         };
+
         // End date
         editEndDate.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-                // Date date;
-                String info = editEndDate.getText().toString();
-                if (info.equals("")) info = "01/01/22";
+                if (endDateString.equals("")) endDateString = "01/01/22";
                 try {
-                    endDateCalendar.setTime(sdf.parse(info));
+                    endDateCalendar.setTime(sdf.parse(endDateString));
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                new DatePickerDialog(TermEdit.this, endDatePicker, endDateCalendar
+                new DatePickerDialog(TermAdd.this, endDatePicker, endDateCalendar
                         .get(Calendar.YEAR), endDateCalendar.get(Calendar.MONTH),
                         endDateCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
@@ -118,7 +109,6 @@ public class TermEdit extends AppCompatActivity {
                 updateLabelEnd();
             }
         };
-
     }
 
     private  void updateLabelStart(){
@@ -145,17 +135,11 @@ public class TermEdit extends AppCompatActivity {
     }
 
     public void saveButton(View view) {
-        Term term;
-        if (id == -1) {
-            int newId = repo.getAllTerms().get(repo.getAllTerms().size() -1).getTermId() + 1;
-            // Date picker!
-            term = new Term(newId, editName.getText().toString(), startDate, endDate);
-            repo.insert(term);
-        }
-        else {
-            term = new Term(id, editName.getText().toString(), startDate, endDate);
-            repo.update(term);
-        }
-    }
+        int id = repo.getAllTerms().get(repo.getAllTerms().size() -1).getTermId() + 1;
+        Term term = new Term(id, editName.getText().toString(), startDate, endDate);
+        repo.insert(term);
+        Intent intent = new Intent(TermAdd.this, TermList.class);
+        startActivity(intent);
 
+    }
 }

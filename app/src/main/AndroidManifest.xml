@@ -14,10 +14,10 @@
         android:theme="@style/Theme.StudentScheduleApp"
         tools:targetApi="31">
         <activity
-            android:name=".CourseEdit"
+            android:name=".UI.CourseAdd"
             android:exported="false" />
         <activity
-            android:name=".UI.TermEdit"
+            android:name=".UI.TermAdd"
             android:exported="false"
             android:label="Add or Edit Term"
             android:parentActivityName=".UI.TermDetails" />

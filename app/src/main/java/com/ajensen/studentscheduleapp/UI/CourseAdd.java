@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.ajensen.studentscheduleapp.R;
 
-public class CourseEdit extends AppCompatActivity {
+public class CourseAdd extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_course_edit);
+        setContentView(R.layout.activity_course_add);
     }
 }
