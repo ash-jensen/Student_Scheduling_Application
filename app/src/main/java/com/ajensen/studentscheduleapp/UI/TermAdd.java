@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.ajensen.studentscheduleapp.Database.Repository;
 import com.ajensen.studentscheduleapp.Entity.Term;
@@ -47,6 +48,7 @@ public class TermAdd extends AppCompatActivity {
         editStartDate = findViewById(R.id.editStartDate);
         editEndDate = findViewById(R.id.editEndDate);
         repo = new Repository(getApplication());
+
         // Date pickers and formatter
         dateFormat = "MM/dd/yy";
         sdf = new SimpleDateFormat(dateFormat, Locale.US);
@@ -56,6 +58,7 @@ public class TermAdd extends AppCompatActivity {
         endDate = new Date();
         endDateString = sdf.format(endDate);
         editEndDate.setText(endDateString);
+
         // Start date
         editStartDate.setOnClickListener(new View.OnClickListener() {
 
@@ -121,7 +124,7 @@ public class TermAdd extends AppCompatActivity {
 
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_term_edit, menu);
+        getMenuInflater().inflate(R.menu.menu_term_add, menu);
         return true;
     }
 
@@ -130,6 +133,9 @@ public class TermAdd extends AppCompatActivity {
             case android.R.id.home:
                 this.finish();
                 return true;
+            case R.id.termList:
+                Intent intent = new Intent(TermAdd.this, TermList.class);
+                startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -138,8 +144,9 @@ public class TermAdd extends AppCompatActivity {
         int id = repo.getAllTerms().get(repo.getAllTerms().size() -1).getTermId() + 1;
         Term term = new Term(id, editName.getText().toString(), startDate, endDate);
         repo.insert(term);
+        Toast.makeText(TermAdd.this, "Term has been added." +
+                "\n You will now be taken to  term list.", Toast.LENGTH_LONG).show();
         Intent intent = new Intent(TermAdd.this, TermList.class);
         startActivity(intent);
-
     }
 }

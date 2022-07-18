@@ -42,11 +42,11 @@ public class MainActivity extends AppCompatActivity {
         repo.insert(term);
 
         // Add Course
-        Course course = new Course(1, "Mobile App Dev", new Date(), new Date(), "Active", "Mr. Person",
+        Course course = new Course(1, "Mobile App Dev", new Date(), new Date(), "Dropped", "Mr. Person",
                 "email@email.com", "801-555-5555", 1, "This is the first class! Yay!");
         repo.insert(course);
 
-        course = new Course(2, "Software 1", new Date(), new Date(), "Active", "Mr. Person",
+        course = new Course(2, "Software 1", new Date(), new Date(), "Plan to Take", "Mr. Person",
                 "email@email.com", "801-555-5555", 1, "This is the first class! Yay!");
         repo.insert(course);
 

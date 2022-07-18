@@ -8,8 +8,8 @@
 
     <ScrollView
         android:id="@+id/courseDetailSV"
-        android:layout_width="392dp"
-        android:layout_height="183dp"
+        android:layout_width="385dp"
+        android:layout_height="161dp"
         android:layout_margin="10dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -27,7 +27,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Course Name" />
+                    android:text="Course Name:" />
 
                 <EditText
                     android:id="@+id/editName"
@@ -44,7 +44,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Course Start Date: " />
+                    android:text="Start Date: " />
 
                 <EditText
                     android:id="@+id/editStartDate"
@@ -61,7 +61,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Course End Date" />
+                    android:text="End Date:" />
 
                 <EditText
                     android:id="@+id/editEndDate"
@@ -78,13 +78,23 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Course Status" />
+                    android:text="Status:" />
 
                 <EditText
                     android:id="@+id/editStatus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Enter Course Name" />
+                    android:hint="Enter Course Status"
+                    android:inputType="none"
+                    android:enabled="false"/>
+
+                <Button
+                    android:id="@+id/statusButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="Status" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -95,13 +105,13 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Course Instructor" />
+                    android:text="Instructor:" />
 
                 <EditText
                     android:id="@+id/editInstructor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Enter Course Name" />
+                    android:hint="Enter Course Instructor" />
             </LinearLayout>
 
             <LinearLayout
@@ -112,13 +122,13 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Instructor Phone Number" />
+                    android:text="Phone Number:" />
 
                 <EditText
                     android:id="@+id/editNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Enter Instructor Number"/>
+                    android:hint="Enter Instructor Number" />
             </LinearLayout>
 
             <LinearLayout
@@ -129,7 +139,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Instructor Email" />
+                    android:text="Email:" />
 
                 <EditText
                     android:id="@+id/editEmail"
@@ -146,7 +156,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Notes" />
+                    android:text="Notes:" />
 
                 <EditText
                     android:id="@+id/editNotes"
@@ -158,8 +168,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/deleteButton"
@@ -173,10 +183,10 @@
                     android:id="@+id/editButton"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
                     android:clickable="true"
                     android:onClick="saveEditsButton"
-                    android:text="Save Edits"
-                    android:layout_marginLeft="20dp"/>
+                    android:text="Save Edits" />
 
             </LinearLayout>
         </LinearLayout>
@@ -197,8 +207,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/assessmentListRV"
-        android:layout_width="392dp"
-        android:layout_height="514dp"
+        android:layout_width="379dp"
+        android:layout_height="583dp"
         android:layout_margin="10dp"
         android:background="@color/lavender"
         app:layout_constraintLeft_toLeftOf="parent"

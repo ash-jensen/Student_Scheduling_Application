@@ -208,6 +208,9 @@ public class TermDetails extends AppCompatActivity {
             case android.R.id.home:
                 this.finish();
                 return true;
+            case R.id.termList:
+                Intent intent = new Intent(TermDetails.this, TermList.class);
+                startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -218,9 +221,17 @@ public class TermDetails extends AppCompatActivity {
             int newId = repo.getAllTerms().get(repo.getAllTerms().size() -1).getTermId() + 1;
             term = new Term(newId, editName.getText().toString(), startDate, endDate);
             repo.insert(term);
+            Toast.makeText(TermDetails.this, "Term has been added." +
+                    "\n You will now be taken to term list.", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(TermDetails.this, TermList.class);
+            startActivity(intent);
         }
         else {
             term = new Term(id, editName.getText().toString(), startDate, endDate);
+            Toast.makeText(TermDetails.this, "Term has been updated." +
+                    "\n You will now be taken to term list.", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(TermDetails.this, TermList.class);
+            startActivity(intent);
             repo.update(term);
         }
     }
@@ -234,7 +245,8 @@ public class TermDetails extends AppCompatActivity {
         else {
             // If term has no associated courses, delete
             repo.delete(term);
-            Toast.makeText(TermDetails.this, "Term " + name + " has been deleted.", Toast.LENGTH_LONG).show();
+            Toast.makeText(TermDetails.this, "Term has been deleted. " +
+                    "\n You will now be taken to term list.", Toast.LENGTH_LONG).show();
             Intent intent = new Intent(TermDetails.this, TermList.class);
             startActivity(intent);
         }
@@ -255,6 +267,7 @@ public class TermDetails extends AppCompatActivity {
 
     public void AddCourse(View view) {
         Intent intent = new Intent(TermDetails.this, CourseAdd.class);
+        intent.putExtra("id", id);
         startActivity(intent);
     }
 }

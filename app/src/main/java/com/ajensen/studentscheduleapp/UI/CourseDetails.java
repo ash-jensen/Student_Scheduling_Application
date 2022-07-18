@@ -12,8 +12,13 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.PopupMenu;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.ajensen.studentscheduleapp.Database.Repository;
@@ -34,6 +39,7 @@ public class CourseDetails extends AppCompatActivity {
     Repository repo ;
     EditText editName;
     EditText editStartDate;
+    EditText editEndDate;
     EditText editStatus;
     EditText editInstructor;
     EditText editNumber;
@@ -43,7 +49,6 @@ public class CourseDetails extends AppCompatActivity {
     final Calendar startDateCalendar = Calendar.getInstance();
     DatePickerDialog.OnDateSetListener endDatePicker;
     final Calendar endDateCalendar = Calendar.getInstance();
-    EditText editEndDate;
     int id;
     String name;
     Date startDate;
@@ -59,6 +64,9 @@ public class CourseDetails extends AppCompatActivity {
     String dateFormat;
     SimpleDateFormat sdf;
     List<Assessment> filteredAssessments;
+
+    // DELETE
+    private static final String TAG = "***Course Details***";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,7 +105,7 @@ public class CourseDetails extends AppCompatActivity {
         editStartDate.setText(startDateString);
         endDateString = sdf.format(endDate);
         editEndDate.setText(endDateString);
-        repo = new Repository(getApplication());
+        editStatus.setText(status);
         editInstructor.setText(instructor);
         editNumber.setText(number);
         editEmail.setText(email);
@@ -170,6 +178,41 @@ public class CourseDetails extends AppCompatActivity {
             }
         }
         adapter.setAssessmentsList(filteredAssessments);
+
+        // Course status setup
+        Button button=findViewById(R.id.statusButton);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                statusPopUp(view);
+            }
+        });
+    }
+
+    private void statusPopUp(View view){
+        PopupMenu statusMenu = new PopupMenu(this,view);
+        statusMenu.inflate(R.menu.menu_course_status);
+        statusMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                switch(menuItem.getItemId()){
+                    case R.id.inProgress:
+                        editStatus.setText("In Progress");
+                        return true;
+                    case R.id.completed:
+                        editStatus.setText("Completed");
+                        return true;
+                    case R.id.dropped:
+                        editStatus.setText("Dropped");
+                        return true;
+                    case R.id.planToTake:
+                        editStatus.setText("Plan to Take");
+                        return true;
+                    default:return false;
+                }
+            }
+        });
+        statusMenu.show();
     }
 
     private  void updateLabelStart(){
@@ -191,6 +234,10 @@ public class CourseDetails extends AppCompatActivity {
             case android.R.id.home:
                 this.finish();
                 return true;
+            case R.id.termList:
+                Intent intent = new Intent(CourseDetails.this, TermList.class);
+                startActivity(intent);
+
         }
         return super.onOptionsItemSelected(item);
     }
@@ -199,38 +246,48 @@ public class CourseDetails extends AppCompatActivity {
         Course course;
         if (id == -1) {
             int newId = repo.getAllCourses().get(repo.getAllCourses().size() -1).getCourseId() + 1;
-            course = new Course(newId, editName.getText().toString(), startDate, endDate, status, instructor, number, email, termId, notes);
+            course = new Course(newId, editName.getText().toString(), startDate, endDate, editStatus.getText().toString(), instructor, number, email, termId, notes);
             repo.insert(course);
+            Toast.makeText(CourseDetails.this, "Course has been saved." +
+                    "\n You will now be taken to term list.", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(CourseDetails.this, TermList.class);
+            startActivity(intent);
         }
         else {
-            course = new Course(id, editName.getText().toString(), startDate, endDate, status, instructor, number, email, termId, notes);
+            course = new Course(id, editName.getText().toString(), startDate, endDate, editStatus.getText().toString(), instructor, number, email, termId, notes);
             repo.update(course);
+            Toast.makeText(CourseDetails.this, "Edits have been saved." +
+                    "\n You will now be taken to term list.", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(CourseDetails.this, TermList.class);
+            startActivity(intent);
         }
     }
 
     public void deleteButton(View view) {
         Course course = new Course(id, editName.getText().toString(), startDate, endDate, status, instructor, number, email, termId, notes);
-        /*
-        // check for course
+        // check for assessments
         if (!filteredAssessments.isEmpty()) {
-            Toast.makeText(CourseDetails.this, "Must delete associated courses before deleting term.", Toast.LENGTH_LONG).show();
+            Toast.makeText(CourseDetails.this, "Must delete associated assessments before deleting course.", Toast.LENGTH_LONG).show();
         }
         else {
-
-         */
             // If term has no associated courses, delete
             repo.delete(course);
-            Toast.makeText(CourseDetails.this, "Course " + name + " has been deleted.", Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(CourseDetails.this, TermDetails.class);
+            Toast.makeText(CourseDetails.this, "Course has been deleted." +
+                    "\n You will now be taken to term list.", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(CourseDetails.this, TermList.class);
             startActivity(intent);
-        /*
         }
-
-         */
     }
 
+    // **** FIX ME ****
     public void AddAssessment(View view) {
-        Intent intent = new Intent(CourseDetails.this, AssessmentAdd.class);
+        // Intent intent = new Intent(CourseDetails.this, AssessmentAdd.class);
+        // startActivity(intent);
+
+        Intent intent = new Intent(CourseDetails.this, AssessmentDetails.class);
+        intent.putExtra("termId", termId);
         startActivity(intent);
     }
+
+
 }

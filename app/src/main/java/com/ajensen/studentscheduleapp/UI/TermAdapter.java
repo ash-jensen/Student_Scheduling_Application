@@ -38,7 +38,6 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.TermViewHolder
                     Intent intent = new Intent(context, TermDetails.class);
                     intent.putExtra("id", current.getTermId());
                     intent.putExtra("name", current.getTermName());
-                    // change to use date picker, here and in term details
                     intent.putExtra("startDate", (current.getStartDate()).getTime());
                     intent.putExtra("endDate", (current.getEndDate()).getTime());
                     context.startActivity(intent);
