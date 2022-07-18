@@ -56,10 +56,12 @@ public class TermDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_term_details);
 
-        // Get info about selected Term from TermList
+        // Set names for textEdits
         editName = findViewById(R.id.editName);
         editStartDate = findViewById(R.id.editStartDate);
         editEndDate = findViewById(R.id.editEndDate);
+
+        // Get info about selected Term from TermList
         id = getIntent().getIntExtra("id", -1);
         name = getIntent().getStringExtra("name");
         startDate = new Date();
@@ -67,7 +69,8 @@ public class TermDetails extends AppCompatActivity {
         endDate = new Date();
         endDate.setTime(getIntent().getLongExtra("endDate", -1));
         editName.setText(name);
-        // Date formatter and date picker
+
+        // Fill textEdits
         dateFormat = "MM/dd/yy";
         sdf = new SimpleDateFormat(dateFormat, Locale.US);
         startDateString = sdf.format(startDate);
@@ -75,6 +78,8 @@ public class TermDetails extends AppCompatActivity {
         endDateString = sdf.format(endDate);
         editEndDate.setText(endDateString);
         repo = new Repository(getApplication());
+
+        // Date Pickers
         editStartDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -130,15 +135,15 @@ public class TermDetails extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.courseListRV);
         Repository repo = new Repository(getApplication());
         List<Course> courses = repo.getAllCourses();
-        final CourseAdapter adapter = new CourseAdapter(this);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         filteredCourses = new ArrayList<>();
         for(Course c:repo.getAllCourses()) {
             if(c.getTermId() == id) {
                 filteredCourses.add(c);
             }
         }
+        final CourseAdapter adapter = new CourseAdapter(this);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter.setCourseList(filteredCourses);
     }
 
@@ -220,7 +225,6 @@ public class TermDetails extends AppCompatActivity {
         }
     }
 
-    // FIX ME *******************************
     public void deleteButton(View view) {
         Term term = new Term(id, name, startDate, endDate);
         // check for course
@@ -250,5 +254,7 @@ public class TermDetails extends AppCompatActivity {
      */
 
     public void AddCourse(View view) {
+        Intent intent = new Intent(TermDetails.this, CourseAdd.class);
+        startActivity(intent);
     }
 }

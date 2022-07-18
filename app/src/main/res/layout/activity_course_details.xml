@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.TermDetails">
+    tools:context=".UI.CourseDetails">
 
     <ScrollView
-        android:id="@+id/termDetailSV"
+        android:id="@+id/courseDetailSV"
         android:layout_width="392dp"
         android:layout_height="183dp"
         android:layout_margin="10dp"
@@ -27,13 +27,13 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Term Name" />
+                    android:text="Course Name" />
 
                 <EditText
                     android:id="@+id/editName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Enter Term Name" />
+                    android:hint="Enter Course Name" />
             </LinearLayout>
 
             <LinearLayout
@@ -44,13 +44,13 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Term Start Date: " />
+                    android:text="Course Start Date: " />
 
                 <EditText
                     android:id="@+id/editStartDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Enter Term Start Date" />
+                    android:hint="Enter Course Start Date" />
             </LinearLayout>
 
             <LinearLayout
@@ -61,13 +61,98 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Term End Date" />
+                    android:text="Course End Date" />
 
                 <EditText
                     android:id="@+id/editEndDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Enter Term End Date" />
+                    android:hint="Enter Course End Date" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Course Status" />
+
+                <EditText
+                    android:id="@+id/editStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter Course Name" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Course Instructor" />
+
+                <EditText
+                    android:id="@+id/editInstructor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter Course Name" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Instructor Phone Number" />
+
+                <EditText
+                    android:id="@+id/editNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter Instructor Number"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Instructor Email" />
+
+                <EditText
+                    android:id="@+id/editEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter Instructor Email" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Notes" />
+
+                <EditText
+                    android:id="@+id/editNotes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Optional Notes" />
             </LinearLayout>
 
             <LinearLayout
@@ -82,7 +167,7 @@
                     android:layout_height="wrap_content"
                     android:clickable="true"
                     android:onClick="deleteButton"
-                    android:text="Delete Term" />
+                    android:text="Delete Course" />
 
                 <Button
                     android:id="@+id/editButton"
@@ -98,25 +183,27 @@
     </ScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/addTermButton"
+        android:id="@+id/addAssessmentButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
         android:clickable="true"
-        android:onClick="AddCourse"
+        android:onClick="AddAssessment"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:srcCompat="@drawable/ic_baseline_add_24" />
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/courseListRV"
+        android:id="@+id/assessmentListRV"
         android:layout_width="392dp"
         android:layout_height="514dp"
         android:layout_margin="10dp"
         android:background="@color/lavender"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/termDetailSV" />
+        app:layout_constraintTop_toBottomOf="@+id/courseDetailSV" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

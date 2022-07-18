@@ -18,14 +18,14 @@ public class Course {
     private Date endDate;
     private String status;
     private String instructor;
+    private String number;
     private String email;
-    private String phoneNumber;
-    private String note;
+    private String notes;
     private int termId;
 
     public Course(int courseId, String courseName, Date startDate, Date endDate,
-                  String status, String instructor, String email, String phoneNumber,
-                  int termId, String note) {
+                  String status, String instructor, String number, String email,
+                  int termId, String notes) {
         this.courseId = courseId;
         this.courseName = courseName;
         this.startDate = startDate;
@@ -33,9 +33,9 @@ public class Course {
         this.status = status;
         this.instructor = instructor;
         this.email = email;
-        this.phoneNumber = phoneNumber;
+        this.number = number;
         this.termId = termId;
-        this.note = note;
+        this.notes = notes;
     }
 
     public int getCourseId() {
@@ -86,20 +86,20 @@ public class Course {
         this.instructor = instructor;
     }
 
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String phoneNumber) {
+        this.number = phoneNumber;
+    }
+
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
     }
 
     public int getTermId() {
@@ -110,12 +110,12 @@ public class Course {
         this.termId = termId;
     }
 
-    public String getNote() {
-        return note;
+    public String getNotes() {
+        return notes;
     }
 
-    public void setNote(String note) {
-        this.note = note;
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 
     @Override
@@ -128,9 +128,9 @@ public class Course {
                 ", status='" + status + '\'' +
                 ", instructor='" + instructor + '\'' +
                 ", email='" + email + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
+                ", phoneNumber='" + number + '\'' +
                 ", termId=" + termId +
-                ", note='" + note + '\'' +
+                ", note='" + notes + '\'' +
                 '}';
     }
 }

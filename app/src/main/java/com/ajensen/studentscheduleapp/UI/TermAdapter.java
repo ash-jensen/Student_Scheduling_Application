@@ -24,6 +24,7 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.TermViewHolder
     // TermView class and constructor
     class TermViewHolder extends RecyclerView.ViewHolder{
         private final TextView termItemView;
+
         // Constructor for the viewHolder
         private TermViewHolder(View itemView) {
             super(itemView);

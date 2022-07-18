@@ -36,9 +36,14 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
                     Intent intent = new Intent(context, CourseDetails.class);
                     intent.putExtra("id", current.getCourseId());
                     intent.putExtra("name", current.getCourseName());
-                    // change to use date picker, here and in term details
                     intent.putExtra("startDate", (current.getStartDate()).toString());
                     intent.putExtra("endDate", (current.getEndDate()).toString());
+                    intent.putExtra("status", current.getStatus());
+                    intent.putExtra("instructor", current.getInstructor());
+                    intent.putExtra("number", current.getNumber());
+                    intent.putExtra("email", current.getEmail());
+                    intent.putExtra("termId", current.getTermId());
+                    intent.putExtra("notes", current.getNotes());
                     context.startActivity(intent);
                 }
             });
@@ -73,8 +78,8 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
     }
 
     // Fill courseList with courses
-    public void setCourseList(List<Course> terms) {
-        courseList = terms;
+    public void setCourseList(List<Course> courses) {
+        courseList = courses;
         notifyDataSetChanged();
     }
 
