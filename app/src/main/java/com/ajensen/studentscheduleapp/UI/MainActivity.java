@@ -17,8 +17,11 @@ import com.ajensen.studentscheduleapp.R;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
+    public static int numAlert;
 
+    // Delete
     private static final String TAG = "MainActivity";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

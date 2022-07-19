@@ -8,7 +8,7 @@
 
     <ScrollView
         android:id="@+id/courseDetailSV"
-        android:layout_width="385dp"
+        android:layout_width="392dp"
         android:layout_height="161dp"
         android:layout_margin="10dp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -207,7 +207,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/assessmentListRV"
-        android:layout_width="379dp"
+        android:layout_width="392dp"
         android:layout_height="583dp"
         android:layout_margin="10dp"
         android:background="@color/lavender"

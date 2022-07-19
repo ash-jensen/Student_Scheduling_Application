@@ -4,27 +4,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.PopupMenu;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.ajensen.studentscheduleapp.Database.Repository;
 import com.ajensen.studentscheduleapp.Entity.Assessment;
 import com.ajensen.studentscheduleapp.Entity.Course;
-import com.ajensen.studentscheduleapp.Entity.Term;
 import com.ajensen.studentscheduleapp.R;
 
 import java.text.ParseException;
@@ -167,7 +164,7 @@ public class CourseDetails extends AppCompatActivity {
         // Fill assessmentListRV with assessments
         RecyclerView recyclerView = findViewById(R.id.assessmentListRV);
         Repository repo = new Repository(getApplication());
-        List<Assessment> assessments = repo.getAllAssessments();
+        // List<Assessment> assessments = repo.getAllAssessments();
         final AssessmentAdapter adapter = new AssessmentAdapter(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -234,10 +231,32 @@ public class CourseDetails extends AppCompatActivity {
             case android.R.id.home:
                 this.finish();
                 return true;
-            case R.id.termList:
-                Intent intent = new Intent(CourseDetails.this, TermList.class);
-                startActivity(intent);
-
+// DO YOU WANT TERM LIST HERE?
+            case R.id.shareNote:
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, notes);
+                sendIntent.putExtra(Intent.EXTRA_TITLE, name);
+                sendIntent.setType("text/plain");
+                Intent shareIntent = Intent.createChooser(sendIntent, null);
+                startActivity(shareIntent);
+                return true;
+            case R.id.notify:
+                // Start notification
+                Long triggerStart = startDate.getTime();
+                Intent startIntent = new Intent(CourseDetails.this, MyReceiver.class);
+                startIntent.putExtra("key", name + " starts today.");
+                PendingIntent startSender = PendingIntent.getBroadcast(CourseDetails.this, MainActivity.numAlert++, startIntent, PendingIntent.FLAG_IMMUTABLE);
+                AlarmManager startAlarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                startAlarmManager.set(AlarmManager.RTC_WAKEUP, triggerStart, startSender);
+                // End notification
+                Long triggerEnd = endDate.getTime();
+                Intent endIntent = new Intent(CourseDetails.this, MyReceiver.class);
+                endIntent.putExtra("key", name + " ends today.");
+                PendingIntent endSender = PendingIntent.getBroadcast(CourseDetails.this, MainActivity.numAlert++, endIntent, PendingIntent.FLAG_IMMUTABLE);
+                AlarmManager endAlarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                endAlarmManager.set(AlarmManager.RTC_WAKEUP, triggerEnd, endSender);
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
