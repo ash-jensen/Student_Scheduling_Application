@@ -70,7 +70,7 @@ public class CourseAdd extends AppCompatActivity {
         editNotes = findViewById(R.id.editNotes);
         repo = new Repository(getApplication());
 
-        // Get termId from TermList
+        // Get termId from termList
         termId = getIntent().getIntExtra("id", -1);
 
         // Date pickers and formatter
@@ -87,7 +87,7 @@ public class CourseAdd extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                if (startDateString.equals("")) startDateString = "01/01/22";
+                if (startDateString.equals("")) startDateString = "07/01/22";
                 try {
                     startDateCalendar.setTime(sdf.parse(startDateString));
                 } catch (ParseException e) {
@@ -113,7 +113,7 @@ public class CourseAdd extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                if (endDateString.equals("")) endDateString = "01/01/22";
+                if (endDateString.equals("")) endDateString = "07/01/22";
                 try {
                     endDateCalendar.setTime(sdf.parse(endDateString));
                 } catch (ParseException e) {
@@ -198,7 +198,11 @@ public class CourseAdd extends AppCompatActivity {
     }
 
     public void saveButton(View view) {
-        int id = repo.getAllCourses().get(repo.getAllCourses().size() -1).getCourseId() + 1;
+        if(repo.getAllCourses().isEmpty())
+            id = 1;
+        else {
+            id = repo.getAllCourses().get(repo.getAllCourses().size() - 1).getCourseId() + 1;
+        }
         Course course = new Course(id, editName.getText().toString(), startDate, endDate, editStatus.getText().toString(), editInstructor.getText().toString(), editNumber.getText().toString(), editEmail.getText().toString(), termId, editNotes.getText().toString());
         repo.insert(course);
         Toast.makeText(CourseAdd.this, "Course has been saved." +

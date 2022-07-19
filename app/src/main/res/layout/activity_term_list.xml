@@ -20,8 +20,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/termListRV"
-        android:layout_width="392dp"
-        android:layout_height="636dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_margin="10dp"
         android:background="@color/lavender"
         app:layout_constraintLeft_toLeftOf="parent"

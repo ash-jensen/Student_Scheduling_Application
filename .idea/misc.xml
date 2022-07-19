@@ -25,6 +25,9 @@
         <entry key="app/src/main/res/layout/list_item_assessment.xml" value="0.35597826086956524" />
         <entry key="app/src/main/res/layout/list_item_course.xml" value="0.34103260869565216" />
         <entry key="app/src/main/res/layout/list_item_term.xml" value="0.34103260869565216" />
+        <entry key="app/src/main/res/menu/menu_assessment_add.xml" value="0.1" />
+        <entry key="app/src/main/res/menu/menu_assessment_detail.xml" value="0.37083333333333335" />
+        <entry key="app/src/main/res/menu/menu_assessment_type.xml" value="0.371875" />
         <entry key="app/src/main/res/menu/menu_course_add.xml" value="0.1" />
         <entry key="app/src/main/res/menu/menu_course_detail.xml" value="0.38697916666666665" />
         <entry key="app/src/main/res/menu/menu_course_status.xml" value="0.37083333333333335" />

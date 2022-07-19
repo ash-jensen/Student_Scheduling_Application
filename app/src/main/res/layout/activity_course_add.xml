@@ -8,8 +8,8 @@
 
     <ScrollView
         android:id="@+id/courseAddSV"
-        android:layout_width="392dp"
-        android:layout_height="378dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="10dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -50,7 +50,10 @@
                     android:id="@+id/editStartDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Enter Course Start Date" />
+                    android:hint="Enter Course Start Date"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:clickable="true"/>
             </LinearLayout>
 
             <LinearLayout
@@ -67,7 +70,10 @@
                     android:id="@+id/editEndDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Enter Course End Date" />
+                    android:hint="Enter Course End Date"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:clickable="true"/>
             </LinearLayout>
 
             <LinearLayout

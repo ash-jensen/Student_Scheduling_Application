@@ -141,7 +141,12 @@ public class TermAdd extends AppCompatActivity {
     }
 
     public void saveButton(View view) {
-        int id = repo.getAllTerms().get(repo.getAllTerms().size() -1).getTermId() + 1;
+        int id;
+        if(repo.getAllTerms().isEmpty())
+            id = 1;
+        else {
+            id = repo.getAllTerms().get(repo.getAllTerms().size() - 1).getTermId() + 1;
+        }
         Term term = new Term(id, editName.getText().toString(), startDate, endDate);
         repo.insert(term);
         Toast.makeText(TermAdd.this, "Term has been added." +

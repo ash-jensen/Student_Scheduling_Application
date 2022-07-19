@@ -113,8 +113,8 @@ public class CourseDetails extends AppCompatActivity {
         editStartDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String info = editEndDate.getText().toString();
-                if (info.equals("")) info = "01/01/22";
+                String info = editStartDate.getText().toString();
+                if (info.equals("")) info = "07/01/22";
                 try {
                     startDateCalendar.setTime(sdf.parse(info));
                 } catch (ParseException e) {
@@ -139,7 +139,7 @@ public class CourseDetails extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String info = editEndDate.getText().toString();
-                if (info.equals("")) info = "01/01/22";
+                if (info.equals("")) info = "07/01/22";
                 try {
                     endDateCalendar.setTime(sdf.parse(info));
                 } catch (ParseException e) {
@@ -164,20 +164,20 @@ public class CourseDetails extends AppCompatActivity {
         // Fill assessmentListRV with assessments
         RecyclerView recyclerView = findViewById(R.id.assessmentListRV);
         Repository repo = new Repository(getApplication());
-        // List<Assessment> assessments = repo.getAllAssessments();
-        final AssessmentAdapter adapter = new AssessmentAdapter(this);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        List<Assessment> assessments = repo.getAllAssessments();
         filteredAssessments = new ArrayList<>();
         for(Assessment a:repo.getAllAssessments()) {
-            if(a.getAssmtId() == id) {
+            if(a.getCourseId() == id) {
                 filteredAssessments.add(a);
             }
         }
+        final AssessmentAdapter adapter = new AssessmentAdapter(this);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter.setAssessmentsList(filteredAssessments);
 
         // Course status setup
-        Button button=findViewById(R.id.statusButton);
+        Button button = findViewById(R.id.statusButton);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -241,14 +241,18 @@ public class CourseDetails extends AppCompatActivity {
                 Intent shareIntent = Intent.createChooser(sendIntent, null);
                 startActivity(shareIntent);
                 return true;
-            case R.id.notify:
+            case R.id.notifyStart:
                 // Start notification
                 Long triggerStart = startDate.getTime();
                 Intent startIntent = new Intent(CourseDetails.this, MyReceiver.class);
                 startIntent.putExtra("key", name + " starts today.");
                 PendingIntent startSender = PendingIntent.getBroadcast(CourseDetails.this, MainActivity.numAlert++, startIntent, PendingIntent.FLAG_IMMUTABLE);
+
+                // PendingIntent pending = PendingIntent.getBroadcast(getContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);FLAG_IMMUTABLE
                 AlarmManager startAlarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
                 startAlarmManager.set(AlarmManager.RTC_WAKEUP, triggerStart, startSender);
+                return true;
+            case R.id.notifyEnd:
                 // End notification
                 Long triggerEnd = endDate.getTime();
                 Intent endIntent = new Intent(CourseDetails.this, MyReceiver.class);
@@ -265,7 +269,10 @@ public class CourseDetails extends AppCompatActivity {
         Course course;
         if (id == -1) {
             int newId = repo.getAllCourses().get(repo.getAllCourses().size() -1).getCourseId() + 1;
-            course = new Course(newId, editName.getText().toString(), startDate, endDate, editStatus.getText().toString(), instructor, number, email, termId, notes);
+            course = new Course(newId,editName.getText().toString(), startDate, endDate,
+                    editStatus.getText().toString(), editInstructor.getText().toString(),
+                    editNumber.getText().toString(), editEmail.getText().toString(), termId,
+                    editNotes.getText().toString());
             repo.insert(course);
             Toast.makeText(CourseDetails.this, "Course has been saved." +
                     "\n You will now be taken to term list.", Toast.LENGTH_LONG).show();
@@ -273,7 +280,10 @@ public class CourseDetails extends AppCompatActivity {
             startActivity(intent);
         }
         else {
-            course = new Course(id, editName.getText().toString(), startDate, endDate, editStatus.getText().toString(), instructor, number, email, termId, notes);
+            course = new Course(id, editName.getText().toString(), startDate, endDate,
+                    editStatus.getText().toString(), editInstructor.getText().toString(),
+                    editNumber.getText().toString(), editEmail.getText().toString(), termId,
+                    editNotes.getText().toString());
             repo.update(course);
             Toast.makeText(CourseDetails.this, "Edits have been saved." +
                     "\n You will now be taken to term list.", Toast.LENGTH_LONG).show();
@@ -298,13 +308,9 @@ public class CourseDetails extends AppCompatActivity {
         }
     }
 
-    // **** FIX ME ****
     public void AddAssessment(View view) {
-        // Intent intent = new Intent(CourseDetails.this, AssessmentAdd.class);
-        // startActivity(intent);
-
-        Intent intent = new Intent(CourseDetails.this, AssessmentDetails.class);
-        intent.putExtra("termId", termId);
+        Intent intent = new Intent(CourseDetails.this, AssessmentAdd.class);
+        intent.putExtra("id", id);
         startActivity(intent);
     }
 

@@ -17,7 +17,6 @@ import com.ajensen.studentscheduleapp.R;
 import java.util.List;
 
 public class TermList extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

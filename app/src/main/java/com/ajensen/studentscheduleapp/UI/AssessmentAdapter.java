@@ -2,6 +2,7 @@ package com.ajensen.studentscheduleapp.UI;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,10 @@ public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.As
 
     // AssessmentView class and constructor
     class AssessmentViewHolder extends RecyclerView.ViewHolder{
+
+        // DELETE
+        private static final String TAG = "***ASSESSMENT ADAPTER***";
+
         private final TextView assessmentItemView;
         // Constructor for the viewHolder
         private AssessmentViewHolder(View itemView) {
@@ -37,8 +42,10 @@ public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.As
                     Intent intent = new Intent(context, AssessmentDetails.class);
                     intent.putExtra("id", current.getAssmtId());
                     intent.putExtra("name", current.getAssmtName());
-                    intent.putExtra("startDate", (current.getStartDate()).toString());
-                    intent.putExtra("endDate", (current.getEndDate()).toString());
+                    intent.putExtra("type", current.getAssmtType());
+                    intent.putExtra("startDate", (current.getStartDate()).getTime());
+                    intent.putExtra("endDate", (current.getEndDate()).getTime());
+                    intent.putExtra("courseId", current.getCourseId());
                     context.startActivity(intent);
                 }
             });

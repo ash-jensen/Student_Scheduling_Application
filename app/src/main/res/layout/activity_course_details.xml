@@ -8,7 +8,7 @@
 
     <ScrollView
         android:id="@+id/courseDetailSV"
-        android:layout_width="392dp"
+        android:layout_width="match_parent"
         android:layout_height="161dp"
         android:layout_margin="10dp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -50,7 +50,10 @@
                     android:id="@+id/editStartDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Enter Course Start Date" />
+                    android:hint="Enter Course Start Date"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:clickable="true"/>
             </LinearLayout>
 
             <LinearLayout
@@ -67,7 +70,10 @@
                     android:id="@+id/editEndDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Enter Course End Date" />
+                    android:hint="Enter Course End Date"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:clickable="true"/>
             </LinearLayout>
 
             <LinearLayout
@@ -84,7 +90,7 @@
                     android:id="@+id/editStatus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Enter Course Status"
+                    android:hint="Choose Course Status"
                     android:inputType="none"
                     android:enabled="false"/>
 
@@ -207,7 +213,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/assessmentListRV"
-        android:layout_width="392dp"
+        android:layout_width="match_parent"
         android:layout_height="583dp"
         android:layout_margin="10dp"
         android:background="@color/lavender"

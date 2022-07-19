@@ -8,7 +8,7 @@
 
     <ScrollView
         android:id="@+id/termDetailSV"
-        android:layout_width="392dp"
+        android:layout_width="match_parent"
         android:layout_height="183dp"
         android:layout_margin="10dp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -50,7 +50,10 @@
                     android:id="@+id/editStartDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Enter Term Start Date" />
+                    android:hint="Enter Term Start Date"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:clickable="true"/>
             </LinearLayout>
 
             <LinearLayout
@@ -67,7 +70,10 @@
                     android:id="@+id/editEndDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Enter Term End Date" />
+                    android:hint="Enter Term End Date"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:clickable="true"/>
             </LinearLayout>
 
             <LinearLayout
@@ -112,7 +118,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/courseListRV"
-        android:layout_width="392dp"
+        android:layout_width="match_parent"
         android:layout_height="514dp"
         android:layout_margin="10dp"
         android:background="@color/lavender"

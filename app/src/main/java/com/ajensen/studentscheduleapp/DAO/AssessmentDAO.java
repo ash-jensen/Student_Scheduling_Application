@@ -8,7 +8,7 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.ajensen.studentscheduleapp.Entity.Assessment;
-import com.ajensen.studentscheduleapp.Entity.Term;
+
 
 import java.util.List;
 
