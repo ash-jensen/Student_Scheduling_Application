@@ -6,10 +6,8 @@ import androidx.room.PrimaryKey;
 
 import java.util.Date;
 
-@Entity (tableName = "courses",
-        foreignKeys = @ForeignKey(entity = Term.class,
-                parentColumns = "termId",
-                childColumns = "termId"))
+@Entity (tableName = "courses", foreignKeys = @ForeignKey(entity = Term.class,
+                parentColumns = "termId", childColumns = "termId"))
 public class Course {
     @PrimaryKey(autoGenerate = true)
     private int courseId;
