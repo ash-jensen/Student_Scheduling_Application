@@ -1,16 +1,11 @@
 package com.ajensen.studentscheduleapp.UI;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.AlarmManager;
 import android.app.DatePickerDialog;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,17 +15,16 @@ import android.widget.EditText;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.ajensen.studentscheduleapp.Database.Repository;
 import com.ajensen.studentscheduleapp.Entity.Assessment;
-import com.ajensen.studentscheduleapp.Entity.Course;
 import com.ajensen.studentscheduleapp.R;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 public class AssessmentDetails extends AppCompatActivity {
@@ -54,9 +48,6 @@ public class AssessmentDetails extends AppCompatActivity {
     String dateFormat;
     SimpleDateFormat sdf;
 
-    // DELETE
-    private static final String TAG = "***Assessment Details***";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,12 +65,9 @@ public class AssessmentDetails extends AppCompatActivity {
         type = getIntent().getStringExtra("type");
         startDate = new Date();
         startDate.setTime(getIntent().getLongExtra("startDate", -1));
-        Log.i(TAG, "1: " + startDate.toString());
         endDate = new Date();
         endDate.setTime(getIntent().getLongExtra("endDate", -1));
-        Log.i(TAG, "1: " + endDate.toString());
         courseId = getIntent().getIntExtra("courseId", -1);
-        Log.i(TAG, "CourseId: " + courseId);
 
         // Fill textEdits
         editName.setText(name);
@@ -115,7 +103,6 @@ public class AssessmentDetails extends AppCompatActivity {
                 startDateCalendar.set(Calendar.MONTH,monthOfYear);
                 startDateCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                 startDate = startDateCalendar.getTime();
-                Log.i(TAG, "onDateSet " + startDate.toString());
                 updateLabelStart();
             }
         };
@@ -141,7 +128,6 @@ public class AssessmentDetails extends AppCompatActivity {
                 endDateCalendar.set(Calendar.MONTH,monthOfYear);
                 endDateCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                 endDate = endDateCalendar.getTime();
-                Log.i(TAG, "onDateSet End: " + endDate.toString());
                 updateLabelEnd();
             }
         };
@@ -184,8 +170,8 @@ public class AssessmentDetails extends AppCompatActivity {
         editEndDate.setText(sdf.format(endDateCalendar.getTime()));
     }
 
+    // Inflate the menu; this adds items to the action bar if it is present.
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_assessment_detail, menu);
         return true;
     }
@@ -255,20 +241,4 @@ public class AssessmentDetails extends AppCompatActivity {
         startActivity(intent);
 
     }
-
-    // **** FIX ME ****
-    /*
-    public void AddAssessment(View view) {
-        // Intent intent = new Intent(CourseDetails.this, AssessmentAdd.class);
-        // startActivity(intent);
-
-        Intent intent = new Intent(CourseDetails.this, AssessmentDetails.class);
-        intent.putExtra("termId", termId);
-        startActivity(intent);
-    }
-
-     */
-
-
-
 }
