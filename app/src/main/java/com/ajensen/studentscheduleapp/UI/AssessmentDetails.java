@@ -195,7 +195,9 @@ public class AssessmentDetails extends AppCompatActivity {
             case android.R.id.home:
                 this.finish();
                 return true;
-// DO YOU WANT TERM LIST HERE?
+            case R.id.termList:
+                Intent intent = new Intent(AssessmentDetails.this, TermList.class);
+                startActivity(intent);
             case R.id.notifyStart:
                 // Start notification
                 Long triggerStart = startDate.getTime();
@@ -219,23 +221,28 @@ public class AssessmentDetails extends AppCompatActivity {
     }
 
     public void saveEditsButton(View view) {
-        Assessment assessment;
-        if (id == -1) {
-            int newId = repo.getAllAssessments().get(repo.getAllAssessments().size() -1).getAssmtId() + 1;
-            assessment = new Assessment(newId, editName.getText().toString(), editType.getText().toString(), startDate, endDate, courseId);
-            repo.insert(assessment);
-            Toast.makeText(AssessmentDetails.this, "Assessment has been saved." +
-                    "\n You will now be taken to term list.", Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(AssessmentDetails.this, TermList.class);
-            startActivity(intent);
+        if (startDate.compareTo(endDate) > 0) {
+            Toast.makeText(AssessmentDetails.this, "End Date must be after Start Date.",
+                    Toast.LENGTH_LONG).show();
         }
         else {
-            assessment = new Assessment(id, editName.getText().toString(), editType.getText().toString(), startDate, endDate,  courseId);
-            repo.update(assessment);
-            Toast.makeText(AssessmentDetails.this, "Edits have been saved." +
-                    "\n You will now be taken to term list.", Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(AssessmentDetails.this, TermList.class);
-            startActivity(intent);
+            Assessment assessment;
+            if (id == -1) {
+                int newId = repo.getAllAssessments().get(repo.getAllAssessments().size() - 1).getAssmtId() + 1;
+                assessment = new Assessment(newId, editName.getText().toString(), editType.getText().toString(), startDate, endDate, courseId);
+                repo.insert(assessment);
+                Toast.makeText(AssessmentDetails.this, "Assessment has been saved." +
+                        "\n You will now be taken to term list.", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(AssessmentDetails.this, TermList.class);
+                startActivity(intent);
+            } else {
+                assessment = new Assessment(id, editName.getText().toString(), editType.getText().toString(), startDate, endDate, courseId);
+                repo.update(assessment);
+                Toast.makeText(AssessmentDetails.this, "Edits have been saved." +
+                        "\n You will now be taken to term list.", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(AssessmentDetails.this, TermList.class);
+                startActivity(intent);
+            }
         }
     }
 

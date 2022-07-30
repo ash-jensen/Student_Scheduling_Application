@@ -92,14 +92,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:enabled="false"
-                    android:hint="Choose Assessment Type"
+                    android:hint="Set Assessment Type"
                     android:inputType="none" />
 
                 <Button
                     android:id="@+id/typeButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="10dp"
                     android:text="Type" />
 
             </LinearLayout>
@@ -122,7 +122,7 @@
                     android:id="@+id/editButton"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="10dp"
                     android:clickable="true"
                     android:onClick="saveEditsButton"
                     android:text="Save Edits" />

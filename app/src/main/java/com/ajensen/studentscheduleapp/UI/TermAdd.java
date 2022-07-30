@@ -141,17 +141,23 @@ public class TermAdd extends AppCompatActivity {
     }
 
     public void saveButton(View view) {
-        int id;
-        if(repo.getAllTerms().isEmpty())
-            id = 1;
-        else {
-            id = repo.getAllTerms().get(repo.getAllTerms().size() - 1).getTermId() + 1;
+        if (startDate.compareTo(endDate) > 0) {
+            Toast.makeText(TermAdd.this, "End Date must be after Start Date.",
+                    Toast.LENGTH_LONG).show();
         }
-        Term term = new Term(id, editName.getText().toString(), startDate, endDate);
-        repo.insert(term);
-        Toast.makeText(TermAdd.this, "Term has been added." +
-                "\n You will now be taken to  term list.", Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(TermAdd.this, TermList.class);
-        startActivity(intent);
+        else {
+            int id;
+            if (repo.getAllTerms().isEmpty())
+                id = 1;
+            else {
+                id = repo.getAllTerms().get(repo.getAllTerms().size() - 1).getTermId() + 1;
+            }
+            Term term = new Term(id, editName.getText().toString(), startDate, endDate);
+            repo.insert(term);
+            Toast.makeText(TermAdd.this, "Term has been added." +
+                    "\n You will now be taken to term list.", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(TermAdd.this, TermList.class);
+            startActivity(intent);
+        }
     }
 }

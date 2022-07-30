@@ -2,9 +2,24 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:title="Back to Term List"
+    <item android:title="Go to Term List"
         android:id="@+id/termList"
         app:showAsAction="never"
+        android:orderInCategory="100"
+        />
+
+    <item android:title="Share Note"
+        android:id="@+id/shareNote"
+        android:orderInCategory="100"
+        />
+
+    <item android:title="Notify Start Date"
+        android:id="@+id/notifyStart"
+        android:orderInCategory="100"
+        />
+
+    <item android:title="Notify End Date"
+        android:id="@+id/notifyEnd"
         android:orderInCategory="100"
         />
 

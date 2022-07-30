@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:title="Back to Term List"
+    <item android:title="Go to Term List"
         android:id="@+id/termList"
         app:showAsAction="never"
         android:orderInCategory="100"

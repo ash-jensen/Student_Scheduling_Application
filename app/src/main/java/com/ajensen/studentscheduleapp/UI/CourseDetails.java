@@ -231,7 +231,9 @@ public class CourseDetails extends AppCompatActivity {
             case android.R.id.home:
                 this.finish();
                 return true;
-// DO YOU WANT TERM LIST HERE?
+            case R.id.termList:
+                Intent intent = new Intent(CourseDetails.this, TermList.class);
+                startActivity(intent);
             case R.id.shareNote:
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
@@ -247,8 +249,6 @@ public class CourseDetails extends AppCompatActivity {
                 Intent startIntent = new Intent(CourseDetails.this, MyReceiver.class);
                 startIntent.putExtra("key", name + " starts today.");
                 PendingIntent startSender = PendingIntent.getBroadcast(CourseDetails.this, MainActivity.numAlert++, startIntent, PendingIntent.FLAG_IMMUTABLE);
-
-                // PendingIntent pending = PendingIntent.getBroadcast(getContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);FLAG_IMMUTABLE
                 AlarmManager startAlarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
                 startAlarmManager.set(AlarmManager.RTC_WAKEUP, triggerStart, startSender);
                 return true;
@@ -266,29 +266,34 @@ public class CourseDetails extends AppCompatActivity {
     }
 
     public void saveEditsButton(View view) {
-        Course course;
-        if (id == -1) {
-            int newId = repo.getAllCourses().get(repo.getAllCourses().size() -1).getCourseId() + 1;
-            course = new Course(newId,editName.getText().toString(), startDate, endDate,
-                    editStatus.getText().toString(), editInstructor.getText().toString(),
-                    editNumber.getText().toString(), editEmail.getText().toString(), termId,
-                    editNotes.getText().toString());
-            repo.insert(course);
-            Toast.makeText(CourseDetails.this, "Course has been saved." +
-                    "\n You will now be taken to term list.", Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(CourseDetails.this, TermList.class);
-            startActivity(intent);
+        if (startDate.compareTo(endDate) > 0) {
+            Toast.makeText(CourseDetails.this, "End Date must be after Start Date.",
+                    Toast.LENGTH_LONG).show();
         }
         else {
-            course = new Course(id, editName.getText().toString(), startDate, endDate,
-                    editStatus.getText().toString(), editInstructor.getText().toString(),
-                    editNumber.getText().toString(), editEmail.getText().toString(), termId,
-                    editNotes.getText().toString());
-            repo.update(course);
-            Toast.makeText(CourseDetails.this, "Edits have been saved." +
-                    "\n You will now be taken to term list.", Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(CourseDetails.this, TermList.class);
-            startActivity(intent);
+            Course course;
+            if (id == -1) {
+                int newId = repo.getAllCourses().get(repo.getAllCourses().size() - 1).getCourseId() + 1;
+                course = new Course(newId, editName.getText().toString(), startDate, endDate,
+                        editStatus.getText().toString(), editInstructor.getText().toString(),
+                        editNumber.getText().toString(), editEmail.getText().toString(), termId,
+                        editNotes.getText().toString());
+                repo.insert(course);
+                Toast.makeText(CourseDetails.this, "Course has been saved." +
+                        "\n You will now be taken to term list.", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(CourseDetails.this, TermList.class);
+                startActivity(intent);
+            } else {
+                course = new Course(id, editName.getText().toString(), startDate, endDate,
+                        editStatus.getText().toString(), editInstructor.getText().toString(),
+                        editNumber.getText().toString(), editEmail.getText().toString(), termId,
+                        editNotes.getText().toString());
+                repo.update(course);
+                Toast.makeText(CourseDetails.this, "Edits have been saved." +
+                        "\n You will now be taken to term list.", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(CourseDetails.this, TermList.class);
+                startActivity(intent);
+            }
         }
     }
 

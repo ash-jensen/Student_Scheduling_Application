@@ -205,9 +205,6 @@ public class TermDetails extends AppCompatActivity {
 
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
-                return true;
             case R.id.termList:
                 Intent intent = new Intent(TermDetails.this, TermList.class);
                 startActivity(intent);
@@ -216,23 +213,28 @@ public class TermDetails extends AppCompatActivity {
     }
 
     public void saveEditsButton(View view) {
-        Term term;
-        if (id == -1) {
-            int newId = repo.getAllTerms().get(repo.getAllTerms().size() -1).getTermId() + 1;
-            term = new Term(newId, editName.getText().toString(), startDate, endDate);
-            repo.insert(term);
-            Toast.makeText(TermDetails.this, "Term has been added." +
-                    "\n You will now be taken to term list.", Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(TermDetails.this, TermList.class);
-            startActivity(intent);
+        if (startDate.compareTo(endDate) > 0) {
+            Toast.makeText(TermDetails.this, "End Date must be after Start Date.",
+                    Toast.LENGTH_LONG).show();
         }
         else {
-            term = new Term(id, editName.getText().toString(), startDate, endDate);
-            Toast.makeText(TermDetails.this, "Term has been updated." +
-                    "\n You will now be taken to term list.", Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(TermDetails.this, TermList.class);
-            startActivity(intent);
-            repo.update(term);
+            Term term;
+            if (id == -1) {
+                int newId = repo.getAllTerms().get(repo.getAllTerms().size() - 1).getTermId() + 1;
+                term = new Term(newId, editName.getText().toString(), startDate, endDate);
+                repo.insert(term);
+                Toast.makeText(TermDetails.this, "Term has been added." +
+                        "\n You will now be taken to term list.", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(TermDetails.this, TermList.class);
+                startActivity(intent);
+            } else {
+                term = new Term(id, editName.getText().toString(), startDate, endDate);
+                Toast.makeText(TermDetails.this, "Term has been updated." +
+                        "\n You will now be taken to term list.", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(TermDetails.this, TermList.class);
+                startActivity(intent);
+                repo.update(term);
+            }
         }
     }
 

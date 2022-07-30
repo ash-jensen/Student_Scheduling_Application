@@ -54,8 +54,8 @@ public class TermList extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()) {
             case android.R.id.home:
-                this.finish();
-                return true;
+                Intent intent = new Intent(TermList.this, MainActivity.class);
+                startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }

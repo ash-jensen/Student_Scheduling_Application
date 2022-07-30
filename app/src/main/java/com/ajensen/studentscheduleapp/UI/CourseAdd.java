@@ -2,7 +2,10 @@ package com.ajensen.studentscheduleapp.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -193,22 +196,55 @@ public class CourseAdd extends AppCompatActivity {
             case R.id.termList:
                 Intent intent = new Intent(CourseAdd.this, TermList.class);
                 startActivity(intent);
+            case R.id.shareNote:
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, notes);
+                sendIntent.putExtra(Intent.EXTRA_TITLE, name);
+                sendIntent.setType("text/plain");
+                Intent shareIntent = Intent.createChooser(sendIntent, null);
+                startActivity(shareIntent);
+                return true;
+            case R.id.notifyStart:
+                // Start notification
+                Long triggerStart = startDate.getTime();
+                Intent startIntent = new Intent(CourseAdd.this, MyReceiver.class);
+                startIntent.putExtra("key", name + " starts today.");
+                PendingIntent startSender = PendingIntent.getBroadcast(CourseAdd.this, MainActivity.numAlert++, startIntent, PendingIntent.FLAG_IMMUTABLE);
+                AlarmManager startAlarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                startAlarmManager.set(AlarmManager.RTC_WAKEUP, triggerStart, startSender);
+                return true;
+            case R.id.notifyEnd:
+                // End notification
+                Long triggerEnd = endDate.getTime();
+                Intent endIntent = new Intent(CourseAdd.this, MyReceiver.class);
+                endIntent.putExtra("key", name + " ends today.");
+                PendingIntent endSender = PendingIntent.getBroadcast(CourseAdd.this, MainActivity.numAlert++, endIntent, PendingIntent.FLAG_IMMUTABLE);
+                AlarmManager endAlarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                endAlarmManager.set(AlarmManager.RTC_WAKEUP, triggerEnd, endSender);
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
     public void saveButton(View view) {
-        if(repo.getAllCourses().isEmpty())
-            id = 1;
-        else {
-            id = repo.getAllCourses().get(repo.getAllCourses().size() - 1).getCourseId() + 1;
+        if (startDate.compareTo(endDate) > 0) {
+            Toast.makeText(CourseAdd.this, "End Date must be after Start Date.",
+                    Toast.LENGTH_LONG).show();
         }
-        Course course = new Course(id, editName.getText().toString(), startDate, endDate, editStatus.getText().toString(), editInstructor.getText().toString(), editNumber.getText().toString(), editEmail.getText().toString(), termId, editNotes.getText().toString());
-        repo.insert(course);
-        Toast.makeText(CourseAdd.this, "Course has been saved." +
-                "\n You will now be taken to term list.", Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(CourseAdd.this, TermList.class);
-        startActivity(intent);
+        else {
+            if (repo.getAllCourses().isEmpty())
+                id = 1;
+            else {
+                id = repo.getAllCourses().get(repo.getAllCourses().size() - 1).getCourseId() + 1;
+            }
+            Course course = new Course(id, editName.getText().toString(), startDate, endDate, editStatus.getText().toString(), editInstructor.getText().toString(), editNumber.getText().toString(), editEmail.getText().toString(), termId, editNotes.getText().toString());
+            repo.insert(course);
+            Toast.makeText(CourseAdd.this, "Course has been saved." +
+                    "\n You will now be taken to term list.", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(CourseAdd.this, TermList.class);
+            startActivity(intent);
+        }
     }
 
 }

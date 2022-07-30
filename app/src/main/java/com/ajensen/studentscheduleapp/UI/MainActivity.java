@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
         // ** DELETE ** //
 
+        /*
         // Add Terms
         Term term = new Term(1, "Spring 2022", new Date(), new Date());
         Log.i(TAG, "Term: " + term);
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
         term = new Term(2, "Fall 2022", new Date(), new Date());
         repo.insert(term);
+
 
         // Add Course
         Course course = new Course(1, "Mobile App Dev", new Date(), new Date(), "Dropped", "Mr. Person",
@@ -56,5 +58,7 @@ public class MainActivity extends AppCompatActivity {
         // Add Assessment
         Assessment assessment = new Assessment(1, "First Test", "Pop Quiz", new Date(), new Date(), 1);
         repo.insert(assessment);
+
+         */
     }
 }

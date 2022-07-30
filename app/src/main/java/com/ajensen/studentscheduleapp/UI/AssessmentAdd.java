@@ -174,23 +174,47 @@ public class AssessmentAdd extends AppCompatActivity {
             case android.R.id.home:
                 this.finish();
                 return true;
-// DO YOU WANT TERM LIST HERE?
+            case R.id.termList:
+                Intent intent = new Intent(AssessmentAdd.this, TermList.class);
+                startActivity(intent);
+            case R.id.notifyStart:
+                // Start notification
+                Long triggerStart = startDate.getTime();
+                Intent startIntent = new Intent(AssessmentAdd.this, MyReceiver.class);
+                startIntent.putExtra("key", name + " starts today.");
+                PendingIntent startSender = PendingIntent.getBroadcast(AssessmentAdd.this, MainActivity.numAlert++, startIntent, PendingIntent.FLAG_IMMUTABLE);
+                AlarmManager startAlarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                startAlarmManager.set(AlarmManager.RTC_WAKEUP, triggerStart, startSender);
+                return true;
+            case R.id.notifyEnd:
+                // End notification
+                Long triggerEnd = endDate.getTime();
+                Intent endIntent = new Intent(AssessmentAdd.this, MyReceiver.class);
+                endIntent.putExtra("key", name + " ends today.");
+                PendingIntent endSender = PendingIntent.getBroadcast(AssessmentAdd.this, MainActivity.numAlert++, endIntent, PendingIntent.FLAG_IMMUTABLE);
+                AlarmManager endAlarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                endAlarmManager.set(AlarmManager.RTC_WAKEUP, triggerEnd, endSender);
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
     public void saveButton(View view) {
-        if(repo.getAllAssessments().isEmpty())
-            id = 1;
-        else {
-            id = repo.getAllAssessments().get(repo.getAllAssessments().size() - 1).getAssmtId() + 1;
+        if (startDate.compareTo(endDate) > 0) {
+            Toast.makeText(AssessmentAdd.this, "End Date must be after Start Date.",
+                    Toast.LENGTH_LONG).show();
+        } else {
+            if (repo.getAllAssessments().isEmpty())
+                id = 1;
+            else {
+                id = repo.getAllAssessments().get(repo.getAllAssessments().size() - 1).getAssmtId() + 1;
+            }
+            Assessment assessment = new Assessment(id, editName.getText().toString(), editType.getText().toString(), startDate, endDate, courseId);
+            repo.insert(assessment);
+            Toast.makeText(AssessmentAdd.this, "Assessment has been saved." +
+                    "\n You will now be taken to term list.", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(AssessmentAdd.this, TermList.class);
+            startActivity(intent);
         }
-        Assessment assessment = new Assessment(id, editName.getText().toString(), editType.getText().toString(), startDate, endDate, courseId);
-        repo.insert(assessment);
-        Toast.makeText(AssessmentAdd.this, "Assessment has been saved." +
-                "\n You will now be taken to term list.", Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(AssessmentAdd.this, TermList.class);
-        startActivity(intent);
-
     }
 }

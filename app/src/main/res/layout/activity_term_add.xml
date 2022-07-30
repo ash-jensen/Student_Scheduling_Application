@@ -8,8 +8,8 @@
 
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="390dp"
+        android:layout_height="276dp"
         android:layout_margin="10dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -50,10 +50,10 @@
                     android:id="@+id/editStartDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Enter Term Start Date"
+                    android:clickable="true"
                     android:focusable="false"
                     android:focusableInTouchMode="false"
-                    android:clickable="true"/>
+                    android:hint="Enter Term Start Date" />
             </LinearLayout>
 
             <LinearLayout
@@ -70,31 +70,29 @@
                     android:id="@+id/editEndDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Enter Term End Date"
+                    android:clickable="true"
                     android:focusable="false"
                     android:focusableInTouchMode="false"
-                    android:clickable="true"/>
+                    android:hint="Enter Term End Date" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/saveButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:onClick="saveButton"
+                    android:text="Save Term" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="679dp">
 
-        <Button
-            android:id="@+id/saveButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:onClick="saveButton"
-            android:text="Save Term" />
-    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
