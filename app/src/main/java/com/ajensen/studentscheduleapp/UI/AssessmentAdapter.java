@@ -2,7 +2,6 @@ package com.ajensen.studentscheduleapp.UI;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ajensen.studentscheduleapp.Entity.Assessment;
-import com.ajensen.studentscheduleapp.Entity.Course;
 import com.ajensen.studentscheduleapp.R;
 
 import java.util.List;
@@ -24,15 +22,13 @@ public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.As
 
     // AssessmentView class and constructor
     class AssessmentViewHolder extends RecyclerView.ViewHolder{
-
-        // DELETE
-        private static final String TAG = "***ASSESSMENT ADAPTER***";
-
         private final TextView assessmentItemView;
+
         // Constructor for the viewHolder
         private AssessmentViewHolder(View itemView) {
             super(itemView);
             assessmentItemView = itemView.findViewById(R.id.assessmentItemTV);
+
             // Click takes you to courseDetails activity, holds all clicked course details
             itemView.setOnClickListener(new View.OnClickListener(){
                 @Override
