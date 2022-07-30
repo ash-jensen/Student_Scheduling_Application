@@ -1,7 +1,5 @@
 package com.ajensen.studentscheduleapp.UI;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.AlarmManager;
 import android.app.DatePickerDialog;
 import android.app.PendingIntent;
@@ -16,6 +14,8 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.PopupMenu;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.ajensen.studentscheduleapp.Database.Repository;
 import com.ajensen.studentscheduleapp.Entity.Assessment;
@@ -39,7 +39,6 @@ public class AssessmentAdd extends AppCompatActivity {
     final Calendar endDateCalendar = Calendar.getInstance();
     int id;
     String name;
-    String type;
     Date startDate;
     Date endDate;
     String startDateString;
@@ -72,6 +71,7 @@ public class AssessmentAdd extends AppCompatActivity {
         endDate = new Date();
         endDateString = sdf.format(endDate);
         editEndDate.setText(endDateString);
+
         // Start Date
         editStartDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,6 +98,7 @@ public class AssessmentAdd extends AppCompatActivity {
                 updateLabelStart();
             }
         };
+
         // End Date
         editEndDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -163,8 +164,8 @@ public class AssessmentAdd extends AppCompatActivity {
         editEndDate.setText(sdf.format(endDateCalendar.getTime()));
     }
 
+    // Inflate the menu; this adds items to the action bar if it is present.
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_assessment_add, menu);
         return true;
     }
