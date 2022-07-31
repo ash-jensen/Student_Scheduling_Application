@@ -1,7 +1,5 @@
 package com.ajensen.studentscheduleapp.UI;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.AlarmManager;
 import android.app.DatePickerDialog;
 import android.app.PendingIntent;
@@ -17,9 +15,10 @@ import android.widget.EditText;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.ajensen.studentscheduleapp.Database.Repository;
 import com.ajensen.studentscheduleapp.Entity.Course;
-import com.ajensen.studentscheduleapp.Entity.Term;
 import com.ajensen.studentscheduleapp.R;
 
 import java.text.ParseException;
@@ -47,10 +46,6 @@ public class CourseAdd extends AppCompatActivity {
     Date endDate;
     String startDateString;
     String endDateString;
-    String status;
-    String instructor;
-    String number;
-    String email;
     int termId;
     String notes;
     String dateFormat;
@@ -85,9 +80,9 @@ public class CourseAdd extends AppCompatActivity {
         endDate = new Date();
         endDateString = sdf.format(endDate);
         editEndDate.setText(endDateString);
+
         // Start date
         editStartDate.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
                 if (startDateString.equals("")) startDateString = "07/01/22";
@@ -111,6 +106,7 @@ public class CourseAdd extends AppCompatActivity {
                 updateLabelStart();
             }
         };
+
         // End date
         editEndDate.setOnClickListener(new View.OnClickListener() {
 
@@ -182,8 +178,8 @@ public class CourseAdd extends AppCompatActivity {
         editEndDate.setText(sdf.format(endDateCalendar.getTime()));
     }
 
+    // Inflate the menu; this adds items to the action bar if it is present.
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_course_add, menu);
         return true;
     }
@@ -246,5 +242,4 @@ public class CourseAdd extends AppCompatActivity {
             startActivity(intent);
         }
     }
-
 }
