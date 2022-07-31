@@ -29,6 +29,7 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.TermViewHolder
         private TermViewHolder(View itemView) {
             super(itemView);
             termItemView = itemView.findViewById(R.id.termItemTV);
+
             // Click takes you to term details activity, holds all clicked term details
             itemView.setOnClickListener(new View.OnClickListener(){
                 @Override
