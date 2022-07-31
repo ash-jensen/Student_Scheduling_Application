@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.TermAdd">
-
+    tools:context=".UI.AssessmentAdd">
 
     <ScrollView
+        android:id="@+id/courseDetailSV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -27,13 +27,13 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Term Name:" />
+                    android:text="Assessment Name: " />
 
                 <EditText
                     android:id="@+id/editName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Enter Term Name" />
+                    android:hint="Enter Assessment Name" />
             </LinearLayout>
 
             <LinearLayout
@@ -50,15 +50,15 @@
                     android:id="@+id/editStartDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:clickable="true"
+                    android:hint="Enter Assessment Start Date"
                     android:focusable="false"
                     android:focusableInTouchMode="false"
-                    android:hint="Enter Term Start Date" />
+                    android:clickable="true"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="horizontal">
 
                 <TextView
@@ -70,17 +70,42 @@
                     android:id="@+id/editEndDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:clickable="true"
+                    android:hint="Enter Assessment End Date"
                     android:focusable="false"
                     android:focusableInTouchMode="false"
-                    android:hint="Enter Term End Date" />
+                    android:clickable="true"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center">
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Type:" />
+
+                <EditText
+                    android:id="@+id/editType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Set Assessment Type"
+                    android:enabled="false"
+                    android:inputType="none" />
+
+                <Button
+                    android:id="@+id/typeButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="Type" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/saveButton"
@@ -88,7 +113,7 @@
                     android:layout_height="wrap_content"
                     android:clickable="true"
                     android:onClick="saveButton"
-                    android:text="Save Term" />
+                    android:text="Save Assessment" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

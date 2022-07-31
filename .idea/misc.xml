@@ -8,6 +8,15 @@
         <entry key="app/src/main/res/drawable/ic_baseline_schedule_24.xml" value="0.2445" />
         <entry key="app/src/main/res/drawable/ic_baseline_school_24.xml" value="0.2445" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.2445" />
+        <entry key="app/src/main/res/layout-land/activity_assessment_add.xml" value="0.18033509700176367" />
+        <entry key="app/src/main/res/layout-land/activity_assessment_details.xml" value="0.1675485008818342" />
+        <entry key="app/src/main/res/layout-land/activity_course_add.xml" value="0.1675485008818342" />
+        <entry key="app/src/main/res/layout-land/activity_course_details.xml" value="0.1675485008818342" />
+        <entry key="app/src/main/res/layout-land/activity_main.xml" value="0.18033509700176367" />
+        <entry key="app/src/main/res/layout-land/activity_term_add.xml" value="0.1675485008818342" />
+        <entry key="app/src/main/res/layout-land/activity_term_details.xml" value="0.37579587637011547" />
+        <entry key="app/src/main/res/layout-land/activity_term_list.xml" value="0.1675485008818342" />
+        <entry key="app/src/main/res/layout-land/list_item_term.xml" value="0.18033509700176367" />
         <entry key="app/src/main/res/layout/activity_assessment_add.xml" value="0.35597826086956524" />
         <entry key="app/src/main/res/layout/activity_assessment_details.xml" value="0.35597826086956524" />
         <entry key="app/src/main/res/layout/activity_course_add.xml" value="0.3080057779947917" />
