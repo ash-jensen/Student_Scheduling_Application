@@ -1,7 +1,5 @@
 package com.ajensen.studentscheduleapp.UI;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +9,8 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.ajensen.studentscheduleapp.Database.Repository;
 import com.ajensen.studentscheduleapp.Entity.Term;
@@ -61,7 +61,6 @@ public class TermAdd extends AppCompatActivity {
 
         // Start date
         editStartDate.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
                 if (startDateString.equals("")) startDateString = "01/01/22";
@@ -88,7 +87,6 @@ public class TermAdd extends AppCompatActivity {
 
         // End date
         editEndDate.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
                 if (endDateString.equals("")) endDateString = "01/01/22";
@@ -122,8 +120,8 @@ public class TermAdd extends AppCompatActivity {
         editEndDate.setText(sdf.format(endDateCalendar.getTime()));
     }
 
+    // Inflate the menu; this adds items to the action bar if it is present.
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_term_add, menu);
         return true;
     }
