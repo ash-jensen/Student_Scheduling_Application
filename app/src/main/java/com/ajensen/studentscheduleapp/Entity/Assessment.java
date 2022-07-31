@@ -2,12 +2,14 @@ package com.ajensen.studentscheduleapp.Entity;
 
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 import java.util.Date;
 
 @Entity (tableName = "assessments", foreignKeys = @ForeignKey(entity = Course.class,
-        parentColumns = "courseId", childColumns = "courseId"))
+        parentColumns = "courseId", childColumns = "courseId"),
+        indices = {@Index(value = {"courseId"})})
 public class Assessment {
     @PrimaryKey(autoGenerate = true)
     private int assmtId;

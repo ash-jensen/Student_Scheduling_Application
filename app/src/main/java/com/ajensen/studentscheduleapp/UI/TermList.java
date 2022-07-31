@@ -56,6 +56,9 @@ public class TermList extends AppCompatActivity {
             case android.R.id.home:
                 Intent intent = new Intent(TermList.this, MainActivity.class);
                 startActivity(intent);
+            case R.id.welcomePage:
+                Intent welcomeIntent = new Intent(TermList.this, MainActivity.class);
+                startActivity(welcomeIntent);
         }
         return super.onOptionsItemSelected(item);
     }

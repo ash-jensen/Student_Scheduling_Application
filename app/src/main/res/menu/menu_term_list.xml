@@ -2,5 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <item android:title="Go to Welcome Page"
+        android:id="@+id/welcomePage"
+        app:showAsAction="never"
+        android:orderInCategory="100"
+        />
 
 </menu>
