@@ -1,20 +1,18 @@
 package com.ajensen.studentscheduleapp.UI;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.DatePickerDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.ajensen.studentscheduleapp.Database.Repository;
 import com.ajensen.studentscheduleapp.Entity.Course;
@@ -48,9 +46,6 @@ public class TermDetails extends AppCompatActivity {
     SimpleDateFormat sdf;
     List<Course> filteredCourses;
 
-    // DELETE
-    private static final String TAG = "***RESTART***";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,7 +74,7 @@ public class TermDetails extends AppCompatActivity {
         editEndDate.setText(endDateString);
         repo = new Repository(getApplication());
 
-        // Date Pickers
+        // Start Date
         editStartDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -105,6 +100,8 @@ public class TermDetails extends AppCompatActivity {
                 updateLabelStart();
             }
         };
+
+        // End Date
         editEndDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -155,50 +152,8 @@ public class TermDetails extends AppCompatActivity {
         editEndDate.setText(sdf.format(endDateCalendar.getTime()));
     }
 
-    // onRusume() DELETE *****************
-    /*
-    @Override
-    public void onResume() {
-        super.onResume();
-        setContentView(R.layout.activity_term_details);
-
-        // Get info about selected Term from TermList
-        editName = findViewById(R.id.editName);
-        editStartDate = findViewById(R.id.editStartDate);
-        editEndDate = findViewById(R.id.editEndDate);
-        id = getIntent().getIntExtra("id", -1);
-        name = getIntent().getStringExtra("name");
-        startDate = new Date();
-        startDate.setTime(getIntent().getLongExtra("startDate", -1));
-        endDate = new Date();
-        endDate.setTime(getIntent().getLongExtra("endDate", -1));
-        editName.setText(name);
-        // Date picker and formatter
-        dateFormat = "MM/dd/yy"; //In which you need put here
-        sdf = new SimpleDateFormat(dateFormat, Locale.US);
-        startDateString = sdf.format(startDate);
-        editStartDate.setText(startDateString);
-        endDateString = sdf.format(endDate);
-        editEndDate.setText(endDateString);
-        repo = new Repository(getApplication());
-
-        Log.i(TAG, "Restart was called, name: " + name);
-
-        // Fill courseListRV with courses
-        RecyclerView recyclerView = findViewById(R.id.courseListRV);
-        Repository repo = new Repository(getApplication());
-        List<Course> courses = repo.getAllCourses();
-        final CourseAdapter adapter = new CourseAdapter(this);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter.setCourseList(courses);
-
-    }
-
-     */
-
+    // Inflate the menu; this adds items to the action bar if it is present.
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_term_detail, menu);
         return true;
     }
@@ -253,19 +208,6 @@ public class TermDetails extends AppCompatActivity {
             startActivity(intent);
         }
     }
-
-    // edit button DELETE *******************
-    /*
-    public void editButton(View view) {
-        Intent intent = new Intent(TermDetails.this, TermEdit.class);
-        intent.putExtra("id", id);
-        intent.putExtra("name", name);
-        // change to use date picker, here and in term details
-        intent.putExtra("startDate", startDate.getTime());
-        intent.putExtra("endDate", endDate.getTime());
-        startActivity(intent);
-    }
-     */
 
     public void AddCourse(View view) {
         Intent intent = new Intent(TermDetails.this, CourseAdd.class);
