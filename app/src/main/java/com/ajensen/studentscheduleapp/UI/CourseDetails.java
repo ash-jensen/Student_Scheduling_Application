@@ -1,9 +1,5 @@
 package com.ajensen.studentscheduleapp.UI;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.AlarmManager;
 import android.app.DatePickerDialog;
 import android.app.PendingIntent;
@@ -18,6 +14,10 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.PopupMenu;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.ajensen.studentscheduleapp.Database.Repository;
 import com.ajensen.studentscheduleapp.Entity.Assessment;
@@ -61,9 +61,6 @@ public class CourseDetails extends AppCompatActivity {
     String dateFormat;
     SimpleDateFormat sdf;
     List<Assessment> filteredAssessments;
-
-    // DELETE
-    private static final String TAG = "***Course Details***";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
