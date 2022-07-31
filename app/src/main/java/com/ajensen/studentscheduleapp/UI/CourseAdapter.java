@@ -23,10 +23,12 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
     // CourseView class and constructor
     class CourseViewHolder extends RecyclerView.ViewHolder{
         private final TextView courseItemView;
+
         // Constructor for the viewHolder
         private CourseViewHolder(View itemView) {
             super(itemView);
             courseItemView = itemView.findViewById(R.id.courseItemTV);
+
             // Click takes you to courseDetails activity, holds all clicked course details
             itemView.setOnClickListener(new View.OnClickListener(){
                 @Override
@@ -73,7 +75,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
             holder.courseItemView.setText(name);
         }
         else {
-            holder.courseItemView.setText("No term name");
+            holder.courseItemView.setText("No course name");
         }
     }
 
